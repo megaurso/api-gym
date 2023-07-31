@@ -2,20 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\Http\Requests\createUserRequest;
+use App\Services\CreateUserService;
+
 
 class UserController extends Controller {
-    public function create(Request $req){
-        $user = User::create($req->all());
-        return response()->json([
-            'id' => $user->id,
-            'name' => $user->name,
-            'cpf' => $user->cpf,
-            'email' => $user->email,
-            'ativo' => true,
-            'created_at' => $user->created_at,
-            'updated_at' => $user->updated_at,
-        ]);
+    public function create(createUserRequest $req){
+        $createUserServicee = new CreateUserService();
+
+        return $createUserServicee->execute($req->all());
     }
 }

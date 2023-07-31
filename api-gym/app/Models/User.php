@@ -45,6 +45,7 @@ class User extends Authenticatable
     {
         static::creating(function ($user) {
             $user->{$user->getKeyName()} = Uuid::uuid4()->toString();
+            $user->ativo = true;
         });
     }
 
@@ -58,6 +59,7 @@ class User extends Authenticatable
         'cpf',
         'email',
         'password',
+        'isAdmin'
         
     ];
 
