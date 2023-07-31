@@ -2,8 +2,10 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -42,11 +44,6 @@ class Handler extends ExceptionHandler
 
     public function render($req, Throwable $error)
     {
-        if ($error instanceof ValidationException) {
-            return response()->json([
-                'errors' => $error->validator->errors()
-            ], 422);
-        }
 
         if ($error instanceof AppError) {
             return response()->json([
@@ -54,6 +51,24 @@ class Handler extends ExceptionHandler
             ], $error->getCode());
         }
 
+        if ($error instanceof AuthorizationException) {
+            return response()->json([
+                'errors' => $error->getMessage()
+            ], 403);
+        }
+
+        if ($error instanceof NotFoundHttpException) {
+            return response()->json([
+                'errors' => "Rota não encontrada"
+            ], 404);
+        }
+
+        if ($error instanceof ValidationException) {
+            return response()->json([
+                'errors' => $error->validator->errors()
+            ], 422);
+        }
+        
         return response()->json([
             'message' => "Ocorreu um erro interno no servidor"
         ], 500);
