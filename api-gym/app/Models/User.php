@@ -23,7 +23,7 @@ class User extends Authenticatable implements JWTSubject
     {
         static::creating(function ($user) {
             $user->{$user->getKeyName()} = Uuid::uuid4()->toString();
-            $user->ativo = true;
+            $user->ativo = false;
         });
     }
 

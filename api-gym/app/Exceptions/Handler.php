@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
@@ -68,6 +69,7 @@ class Handler extends ExceptionHandler
                 'errors' => $error->validator->errors()
             ], 422);
         }
+        Log::error('Internal',[$error]);
         
         return response()->json([
             'message' => "Ocorreu um erro interno no servidor"
