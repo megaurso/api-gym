@@ -28,6 +28,7 @@ class CreateUserRequest extends FormRequest
             'name'=> ['required'],
             'cpf'=> ['required','min:11', 'max:11'],
             'password'=> ['required', 'min:7'],
+            'phone'=> ['required','min:8']
         ];
     }
 
@@ -41,7 +42,9 @@ class CreateUserRequest extends FormRequest
             'name.required' => 'Nome é obrigatório',
             'cpf.required' => 'Cpf é obrigatório',
             'cpf.min' => 'Cpf deve conter 11 caracteres',
-            'cpf.max' => 'Cpf deve conter 11 caracteres'
+            'cpf.max' => 'Cpf deve conter 11 caracteres',
+            'phone.required'=>'Telefone é obrigatório',
+            'phone.min' => 'Telefone deve conter no minimo 8 dígitos'
         ];
     }
 }
