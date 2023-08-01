@@ -11,7 +11,7 @@ class CreateGymPlansTable extends Migration
     {
         Schema::create('gym_plans', function (Blueprint $table) {
             $table->uuid("id")->primary();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->string('validity');
             $table->decimal('price', 8, 2);
             $table->timestamps();
