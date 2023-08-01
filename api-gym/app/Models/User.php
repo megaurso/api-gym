@@ -32,7 +32,8 @@ class User extends Authenticatable implements JWTSubject
         'cpf',
         'email',
         'password',
-        'isAdmin'
+        'isAdmin',
+        'phone'
         
     ];
 
@@ -53,6 +54,15 @@ class User extends Authenticatable implements JWTSubject
         return $this->getKey();
     }
 
+    public function gymPlans()
+    {
+        return $this->belongsToMany(GymPlan::class, 'user_gym_plan', 'user_id', 'gym_plan_id');
+    }
+
+    public function currentPlan()
+    {
+        return $this->belongsTo(GymPlan::class, 'current_plan');
+    }
 
     public function getJWTCustomClaims()
     {
