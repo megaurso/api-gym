@@ -33,7 +33,9 @@ class User extends Authenticatable implements JWTSubject
         'email',
         'password',
         'isAdmin',
-        'phone'
+        'phone',
+        'current_plan',
+        'ativo',
         
     ];
 
@@ -59,13 +61,18 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsToMany(GymPlan::class, 'user_gym_plan', 'user_id', 'gym_plan_id');
     }
 
+    protected $casts = [
+        'plan_history' => 'json',
+    ];
+
     public function currentPlan()
     {
-        return $this->belongsTo(GymPlan::class, 'current_plan');
+        return $this->belongsToMany(GymPlan::class, 'user_gym_plan', 'user_id', 'gym_plan_id')->withTimestamps();
     }
 
     public function getJWTCustomClaims()
     {
         return [];
     }
+
 }
