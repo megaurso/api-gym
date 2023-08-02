@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Exceptions\AppError;
 use Illuminate\Support\Facades\Log;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 class LoginService
 {
@@ -19,9 +18,10 @@ class LoginService
     }
 
     private function responseToken($token){
+        $isAdmin = auth()->user()->isAdmin ?? false;
         return response()->json([
             'token' => $token,
-            'user' => auth()->user()
+            'user' => $isAdmin
         ]);
     }
 }
