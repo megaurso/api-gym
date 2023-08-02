@@ -9,12 +9,12 @@ class GetUsersService
 {
     public function getAll()
     {
-        return User::all();
+        return User::with('gymPlans')->get();
     }
 
     public function getOne($id)
     {
-        $user = User::find($id);
+        $user = User::with('gymPlans')->find($id);
         if (!$user) {
             throw new AppError('User não encontrado', 404);
         }

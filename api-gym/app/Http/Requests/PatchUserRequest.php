@@ -20,6 +20,7 @@ class PatchUserRequest extends FormRequest
             'cpf' => ['sometimes', 'string', 'max:14'], 
             'password' => ['sometimes', 'string', 'min:6'],
             'phone' => ['sometimes', 'string', 'max:20'], 
+            'ativo' => ['sometimes', 'boolean'],
             'isAdmin' => ['sometimes', 'boolean'],
             'current_plan' => ['sometimes', 'string', 'max:255'],
             
