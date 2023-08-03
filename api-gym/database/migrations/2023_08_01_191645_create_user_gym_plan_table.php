@@ -12,6 +12,7 @@ class CreateUserGymPlanTable extends Migration
             $table->id();
             $table->foreignUuid('user_id')->constrained()->onDelete('cascade')->unique();
             $table->foreignUuid('gym_plan_id')->constrained();
+            $table->timestamps();
         });
     }
 

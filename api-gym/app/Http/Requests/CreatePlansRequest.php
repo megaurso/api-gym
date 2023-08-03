@@ -17,7 +17,7 @@ class CreatePlansRequest extends FormRequest
         return [
             'name'=> ['required'],
             'price'=> ['required'],
-            'validity'=> ['required'],
+            'validity' => 'required|in:Mensal,Trimestral,Semestral,Anual',
         ];
     }
 
@@ -27,6 +27,7 @@ class CreatePlansRequest extends FormRequest
             'name.required' => 'Nome é obrigatório',
             'price.required' => 'Preço é obrigatório',
             'validity.required' => 'Duração do plano obrigatória',
+            'validity.in' => 'Plano precisa ser Mensal,Trimestral,Semestral ou Anual',
         ];
     }
 }
