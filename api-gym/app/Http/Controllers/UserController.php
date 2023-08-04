@@ -8,7 +8,7 @@ use App\Services\CreateUserService;
 use App\Services\DeleteUserService;
 use App\Services\GetUsersService;
 use App\Services\PatchUserService;
-use Illuminate\Support\Facades\Log;
+
 
 class UserController extends Controller
 {

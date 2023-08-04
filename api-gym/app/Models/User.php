@@ -3,6 +3,7 @@
 namespace App\Models;
 
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -24,6 +25,7 @@ class User extends Authenticatable implements JWTSubject
         static::creating(function ($user) {
             $user->{$user->getKeyName()} = Uuid::uuid4()->toString();
             $user->ativo = false;
+            $user->trainings()->delete();
         });
     }
 
@@ -36,13 +38,20 @@ class User extends Authenticatable implements JWTSubject
         'phone',
         'current_plan',
         'ativo',
-        
+
     ];
 
-  
+
     protected $hidden = [
         'password',
     ];
+
+
+    protected $casts = [
+        'plan_history' => 'json',
+    ];
+
+    protected $appends = ['trainings'];
 
     public function setPasswordAttribute($password)
     {
@@ -61,18 +70,24 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsToMany(GymPlan::class, 'user_gym_plan', 'user_id', 'gym_plan_id');
     }
 
-    protected $casts = [
-        'plan_history' => 'json',
-    ];
-
     public function currentPlan()
     {
         return $this->belongsToMany(GymPlan::class, 'user_gym_plan', 'user_id', 'gym_plan_id')->withTimestamps();
+    }
+
+
+    public function getTrainingsAttribute()
+    {
+        return $this->trainings()->get(['id', 'horario_entrada', 'horario_saida']);
+    }
+
+    public function trainings()
+    {
+        return $this->hasMany(Training::class)->withTrashed();
     }
 
     public function getJWTCustomClaims()
     {
         return [];
     }
-
 }

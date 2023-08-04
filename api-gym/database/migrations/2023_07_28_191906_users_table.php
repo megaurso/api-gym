@@ -23,6 +23,7 @@ class UsersTable extends Migration
             $table->string("password");
             $table->boolean("ativo")->default(true);
             $table->timestamps();
+            $table->boolean('working_out')->default(false);
         });
 
     }
