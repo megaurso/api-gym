@@ -23,6 +23,11 @@ class CreateWorkingOutService
         if ($existingTraining) {
             throw new AppError('Usuário já possui um treino em andamento.', 400);
         }
+
+        if (!$user->ativo) {
+            throw new AppError('Usuário sem plano ou atrasado. Verifique situação com o financeiro', 403);
+        }
+
         
         $data['horario_entrada'] = now();
 
