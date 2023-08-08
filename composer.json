@@ -1,0 +1,7 @@
+{
+    "extra": {
+        "heroku": {
+            "document-root": "api-gym/public"
+        }
+    }
+}
