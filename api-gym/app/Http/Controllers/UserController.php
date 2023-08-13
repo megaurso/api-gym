@@ -8,7 +8,7 @@ use App\Services\CreateUserService;
 use App\Services\DeleteUserService;
 use App\Services\GetUsersService;
 use App\Services\PatchUserService;
-
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -19,11 +19,23 @@ class UserController extends Controller
         return $createUserServicee->execute($req->all());
     }
 
-    public function getAll()
+    public function getAll(Request $req)
     {
         $getUsersService = new GetUsersService();
-        $users = $getUsersService->getAll();
-        return response()->json($users, 200);
+        $perPage = $req->query('per_page', 5);
+        $query = $getUsersService->getAll();
+        $users = $query->paginate($perPage);
+        return response()->json([
+            'data' => $users->items(),
+            'paginate' => [
+                'current_page' => $users->currentPage(),
+                'last_page' => $users->lastPage(),
+                'prev_page_url' => $users->previousPageUrl(),
+                'next_page_url' => $users->nextPageUrl(),
+                'per_page' => $users->perPage(),
+                'total' => $users->total(),
+            ],
+        ], 200);
     }
 
     public function getOne($id)
