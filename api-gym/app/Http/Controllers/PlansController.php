@@ -8,6 +8,7 @@ use App\Services\PlansServices\CreatePlansService;
 use App\Services\PlansServices\DeletePlansService;
 use App\Services\PlansServices\GetPlansService;
 use App\Services\PlansServices\PatchPlansService;
+use Illuminate\Http\Request;
 
 class PlansController extends Controller
 {
@@ -17,11 +18,23 @@ class PlansController extends Controller
         return $createPlansService->execute($req->all());
     }
 
-    public function getAll()
+    public function getAll(Request $req)
     {
         $getPlansService = new GetPlansService();
-        $plans = $getPlansService->getAll();
-        return response()->json($plans, 200);
+        $perPage = $req->query('per_page', 5);
+        $query = $getPlansService->getAll();
+        $plans = $query->paginate($perPage);
+        return response()->json([
+            'data' => $plans->items(),
+            'meta' => [
+                'current_page' => $plans->currentPage(),
+                'last_page' => $plans->lastPage(),
+                'prev_page_url' => $plans->previousPageUrl(),
+                'next_page_url' => $plans->nextPageUrl(),
+                'per_page' => $plans->perPage(),
+                'total' => $plans->total(),
+            ],
+        ], 200);
     }
 
     public function getOne($id)

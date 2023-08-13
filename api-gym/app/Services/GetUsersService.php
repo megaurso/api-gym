@@ -9,7 +9,7 @@ class GetUsersService
 {
     public function getAll()
     {
-        return User::with('gymPlans')->get();
+        return User::with('gymPlans')->getQuery();
     }
 
     public function getOne($id)
