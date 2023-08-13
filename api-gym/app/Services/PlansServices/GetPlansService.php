@@ -9,7 +9,7 @@ class GetPlansService
 {
     public function getAll()
     {
-        return GymPlan::all();
+        return GymPlan::all()->toQuery();
     }
 
     public function getOne($id)
