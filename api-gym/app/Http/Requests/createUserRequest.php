@@ -4,6 +4,18 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema(
+ *     title="CreateUserRequest",
+ *     description="Request schema for creating a user",
+ *     required={"email", "name", "cpf", "password", "phone"},
+ *     @OA\Property(property="email", type="string", example="user@example.com"),
+ *     @OA\Property(property="name", type="string", example="John Doe"),
+ *     @OA\Property(property="cpf", type="string", example="12345678901"),
+ *     @OA\Property(property="password", type="string", example="password123"),
+ *     @OA\Property(property="phone", type="string", example="12345678"),
+ * )
+ */
 class CreateUserRequest extends FormRequest
 {
     /**
