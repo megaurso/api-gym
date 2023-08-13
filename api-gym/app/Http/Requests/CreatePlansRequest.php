@@ -4,6 +4,16 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema(
+ *     schema="CreatePlansRequest",
+ *     type="object",
+ *     title="Create Plans Request",
+ *     @OA\Property(property="name", type="string", description="Nome do plano"),
+ *     @OA\Property(property="price", type="number", description="Preço do plano"),
+ *     @OA\Property(property="validity", type="string", enum={"Mensal", "Trimestral", "Semestral", "Anual"}, description="Duração do plano")
+ * )
+ */
 class CreatePlansRequest extends FormRequest
 {
    
