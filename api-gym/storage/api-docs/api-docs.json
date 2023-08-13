@@ -1,0 +1,388 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API da Academia",
+        "description": "API para criar, listar, obter detalhes, atualizar e excluir usuários,planos e treinos.",
+        "version": "1.0"
+    },
+    "paths": {
+        "/plans": {
+            "get": {
+                "tags": [
+                    "Planos"
+                ],
+                "summary": "Obter lista de planos",
+                "operationId": "10108d7ad84cedc272eea313821fc1ff",
+                "responses": {
+                    "200": {
+                        "description": "Lista de planos"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Planos"
+                ],
+                "summary": "Criar um novo plano",
+                "operationId": "0c92658dbe3b7c0e670c89f99043979d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreatePlansRequest"
+                            },
+                            "examples": {
+                                "Example Request Body": {
+                                    "summary": "Exemplo de corpo de requisição",
+                                    "value": {
+                                        "name": "Plano Mensal",
+                                        "price": 29.99,
+                                        "validity": "Mensal"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Plano criado"
+                    }
+                }
+            }
+        },
+        "/plans/{id}": {
+            "get": {
+                "tags": [
+                    "Planos"
+                ],
+                "summary": "Obter plano por ID",
+                "operationId": "78b3a20fc73778c2c0186d8998a11581",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do plano",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Plano encontrado"
+                    },
+                    "404": {
+                        "description": "Plano não encontrado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Planos"
+                ],
+                "summary": "Excluir plano",
+                "operationId": "8cbe171bcc6f88ed856bdb8ed5b0cd7c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do plano",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Plano excluído"
+                    },
+                    "404": {
+                        "description": "Plano não encontrado"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Planos"
+                ],
+                "summary": "Atualizar plano",
+                "operationId": "4d3c5dd3d10d497cbbbbc2c8bf75d136",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do plano",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreatePlansRequest"
+                            },
+                            "examples": {
+                                "Example Request Body": {
+                                    "summary": "Exemplo de corpo de requisição",
+                                    "value": {
+                                        "name": "Plano Trimestral",
+                                        "price": 75,
+                                        "validity": "Trimestral"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Plano atualizado"
+                    },
+                    "404": {
+                        "description": "Plano não encontrado"
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "Usuários"
+                ],
+                "summary": "Obter lista de usuários",
+                "operationId": "bb2caab318eadb3d78d950ddf09d4958",
+                "responses": {
+                    "200": {
+                        "description": "Lista de usuários"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Usuários"
+                ],
+                "summary": "Criar um novo usuário",
+                "operationId": "525df7b26300b0bb1680e47b6f92dcfd",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateUserRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Usuário criado"
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "tags": [
+                    "Usuários"
+                ],
+                "summary": "Obter usuário por ID",
+                "operationId": "2feab5c7aa3c93736cf41405a92f4e43",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do usuário",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuário encontrado"
+                    },
+                    "404": {
+                        "description": "Usuário não encontrado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Usuários"
+                ],
+                "summary": "Excluir usuário",
+                "operationId": "756b5942311f9c8634257ecb7a9212bd",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do usuário",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Usuário excluído"
+                    },
+                    "404": {
+                        "description": "Usuário não encontrado"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Usuários"
+                ],
+                "summary": "Atualizar usuário",
+                "operationId": "4f4a7ba0c1230602148db098753eedc1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do usuário",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateUserRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Usuário atualizado"
+                    },
+                    "404": {
+                        "description": "Usuário não encontrado"
+                    }
+                }
+            }
+        },
+        "/working-out": {
+            "post": {
+                "tags": [
+                    "Treino"
+                ],
+                "summary": "Registrar entrada para treino",
+                "operationId": "df43bef45532961789bab8bb9e7f9c9f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateWorkingOutRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Aluno entrou para treinar"
+                    }
+                }
+            }
+        },
+        "/working-out/{id}": {
+            "delete": {
+                "tags": [
+                    "Treino"
+                ],
+                "summary": "Concluir treino",
+                "operationId": "576f0dd0baba87640aa4fffdac03abb6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do treino",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Treino concluído"
+                    },
+                    "404": {
+                        "description": "Treino não encontrado"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CreatePlansRequest": {
+                "title": "Create Plans Request",
+                "properties": {
+                    "name": {
+                        "description": "Nome do plano",
+                        "type": "string"
+                    },
+                    "price": {
+                        "description": "Preço do plano",
+                        "type": "number"
+                    },
+                    "validity": {
+                        "description": "Duração do plano",
+                        "type": "string",
+                        "enum": [
+                            "Mensal",
+                            "Trimestral",
+                            "Semestral",
+                            "Anual"
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "CreateWorkingOutRequest": {
+                "title": "Create Working Out Request",
+                "required": [
+                    "user_id"
+                ],
+                "properties": {
+                    "user_id": {
+                        "description": "ID do usuário",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "CreateUserRequest": {
+                "title": "CreateUserRequest",
+                "description": "Request schema for creating a user",
+                "required": [
+                    "email",
+                    "name",
+                    "cpf",
+                    "password",
+                    "phone"
+                ],
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "example": "user@example.com"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "John Doe"
+                    },
+                    "cpf": {
+                        "type": "string",
+                        "example": "12345678901"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "password123"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "12345678"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
