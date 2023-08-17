@@ -17,11 +17,12 @@ class LoginService
         return $this->responseToken($token);
     }
 
-    private function responseToken($token){
-        $isAdmin = auth()->user()->isAdmin ?? false;
+    private function responseToken($token)
+    {
+        $userId = auth()->user()->id ?? null;
         return response()->json([
             'token' => $token,
-            'user' => $isAdmin
+            'user_id' => $userId
         ]);
     }
 }
