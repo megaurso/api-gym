@@ -33,6 +33,8 @@ class CreateWorkingOutService
 
         $training = Training::create($data);
 
+        $user->update(['working_out' => true]);
+
         return $training;
     }
 }

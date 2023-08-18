@@ -4,6 +4,7 @@ namespace App\Services\WorkingOutServices;
 
 use App\Exceptions\AppError;
 use App\Models\Training;
+use App\Models\User;
 
 class StopWorkingOutService
 {
@@ -14,7 +15,11 @@ class StopWorkingOutService
             throw new AppError('Treino não encontrado.', 404);
         }
 
-        $training->horario_saida = now();
-        $training->save();
+        $user = User::find($training->user_id);
+        if ($user) {
+            $training->horario_saida = now();
+            $training->save();
+            $training->user->update(['working_out' => false]);
+        }
     }
 }

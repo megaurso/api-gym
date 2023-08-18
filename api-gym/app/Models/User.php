@@ -38,6 +38,7 @@ class User extends Authenticatable implements JWTSubject
         'phone',
         'current_plan',
         'ativo',
+        'working_out'
 
     ];
 
