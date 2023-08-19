@@ -31,7 +31,12 @@ class WorkingOutController extends Controller
         $user = User::find($data['user_id']);
         $user->trainings()->save($training);
 
-        return response()->json(['message' => 'Aluno entrou para treinar']);
+        $message = 'Aluno entrou para treinar';
+
+        return response()->json([
+            'message' => $message,
+            'id' => $training->id
+        ]);
     }
 
 
