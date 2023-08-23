@@ -15,11 +15,11 @@ Execute o seguinte comando no terminal para instalar as dependências do seu pro
 ## Passo 4: Configure as variáveis de ambiente
 Renomeie o arquivo .env.example para .env e preencha as variáveis de ambiente necessárias, como conexão com o banco de dados e chaves de API.
 
-## Passo 5: Gere a chave de aplicação
-Se a variável APP_KEY no arquivo .env estiver vazia, gere uma chave de aplicação com o seguinte comando no terminal: php artisan key:generate
-
-## Passo 6: Configure o banco de dados
+## Passo 5: Configure o banco de dados
 No arquivo .env, preencha as informações do banco de dados (host, porta, nome do banco, usuário e senha).
+
+## Passo 6: Gere a chave de aplicação
+Se a variável APP_KEY no arquivo .env estiver vazia, gere uma chave de aplicação com o seguinte comando no terminal: php artisan key:generate
 
 ## Passo 7: Migre o banco de dados
 Execute as migrações do banco de dados para criar as tabelas necessárias com o comando no terminal: php artisan migrate
